@@ -5,6 +5,7 @@ const { celebrate, Joi, errors } = require('celebrate');
 const { NotFoundError } = require('./errors/not-found-error');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { createUser, login } = require('./controllers/users');
 
@@ -15,6 +16,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
+
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -40,6 +49,9 @@ app.use('/cards', require('./routes/cards'));
 app.use('*', () => {
   throw new NotFoundError('Не найдено');
 });
+
+app.use(errorLogger);
+
 app.use(errors());
 app.use(error);
 
