@@ -58,7 +58,7 @@ class Register extends React.Component {
   render() {
     return (
       <div className='register'>
-        <h2 className='register__title'>Регистрация пользователя</h2>
+        <h2 className='register__title'>Регистрация</h2>
         <form className="register__form" onSubmit={this.handleSubmit}>
           <input 
             className='register__input' 
