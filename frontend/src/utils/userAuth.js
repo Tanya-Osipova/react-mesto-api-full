@@ -15,18 +15,17 @@ export const register = (email, password) => {
   .then((res) => {
     console.log(res)
     console.log(res.json())
-    console.log(res.body.json())
     try {
       if (res.status === 201){
-        return res.body.json();
+        return res.json();
       }
     } catch(e){
       return (false)
     }
   })
-  // .then((res) => {
-  //   return res.data;
-  // })
+   .then((res) => {
+     return res.body;
+   })
   .catch((err) => err);
 }
 

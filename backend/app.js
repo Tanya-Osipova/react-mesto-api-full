@@ -34,7 +34,7 @@ app.post('/api/signup', celebrate({
     avatar: Joi.string().pattern(/^https?:\/\/(www\.)?[a-zA-Z0-9-]+\.\w{2,}\/?\S*#?$/),
   }),
 }), createUser);
-app.post('/signin', celebrate({
+app.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -43,8 +43,8 @@ app.post('/signin', celebrate({
 
 app.use(auth);
 
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/cards', require('./routes/cards'));
 
 app.use('*', () => {
   throw new NotFoundError('Не найдено');
