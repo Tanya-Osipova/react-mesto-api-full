@@ -14,7 +14,6 @@ export const register = (email, password) => {
   })
   .then((res) => {
     console.log(res)
-    console.log(res.json())
     try {
       if (res.status === 201){
         return res.json();
@@ -23,9 +22,10 @@ export const register = (email, password) => {
       return (false)
     }
   })
-   .then((res) => {
-     return res.body;
-   })
+  //  .then((res) => {
+  //    console.log(res)
+  //    return res.body;
+  //  })
   .catch((err) => err);
 }
 

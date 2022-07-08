@@ -123,7 +123,7 @@ function App() {
 
   // Like
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -151,6 +151,11 @@ function App() {
   function tokenCheck () {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
+      api._headers =  {
+        "Content-Type": "application/json",
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      };
       if(token) {
         userAuth.getContent(token).then((res) => {
           if(res) {

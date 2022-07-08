@@ -12,7 +12,7 @@ export default class Api {
       }
       throw 'Ошибка запроса'
     }).then((obj) => {
-      return obj;
+      return obj.data;
     })
   }
 
