@@ -6,7 +6,9 @@ export default function Navbar(props) {
   const history = useHistory();
   function signOut() {
     localStorage.removeItem('token');
+    props.setUser('')
     history.push('/sign-in');
+    console.log(props.user)
   }
 
   return (

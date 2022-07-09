@@ -37,6 +37,7 @@ function App() {
 
   useEffect(() => {
     if (!loggedIn) return;
+    
     // User info
     api.getUserInfo().then((res) => {
       setCurrentUser(res)
@@ -185,7 +186,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header user={currentUserMail} />
+        <Header user={currentUserMail} setUser={setCurrentUserMail}/>
         <Switch>
           <ProtectedRoute exact loggedIn={loggedIn} path="/"
             component={cardsMain} 

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import * as userAuth from '../utils/userAuth';
 import './styles/Login.css';
 import InfoTooltip from './InfoTooltip';
+import { api } from '../utils/Api'
 
 class Login extends React.Component {
   constructor(props){
@@ -35,6 +36,11 @@ class Login extends React.Component {
           email: '', 
           password: ''
         } ,() => {
+          api._headers =  {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${data.token}`,
+          };
           this.props.handleLogin(e);
           this.props.history.push('/');
         })
