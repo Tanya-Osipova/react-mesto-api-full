@@ -56,7 +56,19 @@ class Login extends React.Component {
           })
         }
     })
-    .catch(err => console.log(err));  
+    .catch(err => {
+      console.log(err)
+      this.setState({
+              message: 'Error'
+            }, () => {
+              this.props.onPopupOpen();
+              const timer = setTimeout(()=>{
+                this.props.onClose()
+              }, 4000);
+              return () => clearTimeout(timer)
+            })
+    }
+      );  
   }
 
   render(){

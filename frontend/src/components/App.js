@@ -146,6 +146,7 @@ function App() {
   function handleLogin(e) {
     e.preventDefault();
     setLoggedIn(true);
+    tokenCheck();
   }
 
   // Check token

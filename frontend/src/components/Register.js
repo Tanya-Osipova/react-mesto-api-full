@@ -51,7 +51,20 @@ class Register extends React.Component {
             return () => clearTimeout(timer)
           })
         }
-      });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+            message: 'Error'
+          }, () => {
+            this.props.onPopupOpen();
+            const timer = setTimeout(()=>{
+              this.props.onClose()
+            }, 4000);
+            return () => clearTimeout(timer)
+          })
+      })
+      ;
     }
   }
 
