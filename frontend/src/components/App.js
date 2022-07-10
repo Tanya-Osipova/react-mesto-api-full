@@ -40,7 +40,8 @@ function App() {
     
     // User info
     api.getUserInfo().then((res) => {
-      setCurrentUser(res)
+      setCurrentUser(res);
+      setCurrentUserMail(res.email);
     })
     .catch(err => {
       console.log(err); 
@@ -187,7 +188,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header user={currentUserMail} setUser={setCurrentUserMail}/>
+        <Header user={currentUserMail} setUser={setCurrentUserMail} isLoggedIn={setLoggedIn} />
         <Switch>
           <ProtectedRoute exact loggedIn={loggedIn} path="/"
             component={cardsMain} 
