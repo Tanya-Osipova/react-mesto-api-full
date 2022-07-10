@@ -150,6 +150,14 @@ function App() {
     tokenCheck();
   }
 
+  // logout
+  function handleLogout() {
+    localStorage.removeItem('token');
+    setCurrentUserMail('');
+    setLoggedIn(false);
+    history.push('/sign-in');
+  }
+
   // Check token
   function tokenCheck () {
     if (localStorage.getItem('token')) {
@@ -188,7 +196,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header user={currentUserMail} setUser={setCurrentUserMail} isLoggedIn={setLoggedIn} />
+        <Header user={currentUserMail} onLogout={handleLogout} />
         <Switch>
           <ProtectedRoute exact loggedIn={loggedIn} path="/"
             component={cardsMain} 

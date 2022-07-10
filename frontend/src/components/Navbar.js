@@ -1,16 +1,8 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './styles/Navbar.css';
 
 export default function Navbar(props) {
-  const history = useHistory();
-  function signOut() {
-    localStorage.removeItem('token');
-    props.setUser('');
-    props.isLoggedIn(false);
-    history.push('/sign-in');
-  }
-
   return (
     <>
       { props.user ? 
@@ -21,7 +13,7 @@ export default function Navbar(props) {
                 <p className="nav__link">{props.user}</p>
               </li>
               <li>
-                <button onClick={signOut} className="nav__button">Выйти</button>
+                <button onClick={props.onLogout} className="nav__button">Выйти</button>
               </li>
             </ul>
           </nav>
